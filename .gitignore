@@ -1,0 +1,20 @@
+# environments
+.venv/
+__pycache__/
+*.pyc
+
+# secrets
+.env
+
+# cached market data (re-fetched on first run; never committed)
+
+
+
+# jupyter
+.ipynb_checkpoints/
+
+# PyMC / ArviZ sampling artefacts
+*.nc
+
+# committed on purpose: assets/*.png (so charts render in the README without running),
+# and the executed notebooks/*.ipynb (so GitHub shows the output inline).

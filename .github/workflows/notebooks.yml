@@ -1,0 +1,70 @@
+name: notebooks
+
+# Keeps the notebooks executable as dependencies drift. Cost-scoped:
+# manual dispatch + monthly schedule + push-to-main when code/notebooks change.
+# No per-PR or nightly runs. See ci-cost-discipline.
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 6 1 * *'   # 06:00 UTC on the 1st of each month
+  push:
+    branches: [main]
+    paths:
+      - '**/*.ipynb'
+      - 'src/**'
+      - 'requirements.txt'
+      - 'pyproject.toml'
+      - '.github/workflows/notebooks.yml'
+
+concurrency:
+  group: notebooks-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  execute:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          if [ -f pyproject.toml ] || [ -f setup.py ]; then pip install -e . || true; fi
+          pip install nbconvert ipykernel
+
+      - name: Execute notebooks
+        run: |
+          set -uo pipefail
+          fail=0
+          while IFS= read -r nb; do
+            echo "::group::$nb"
+            if jupyter nbconvert --to notebook --execute \
+                 --ExecutePreprocessor.timeout=900 \
+                 --output /tmp/_executed.ipynb "$nb"; then
+              echo "OK: $nb"
+            else
+              echo "::error file=$nb::notebook failed to execute"
+              fail=1
+            fi
+            echo "::endgroup::"
+          done < <(find . -name '*.ipynb' \
+                     -not -path './.venv/*' -not -path '*/venv/*' \
+                     -not -path '*/.ipynb_checkpoints/*' | sort)
+          exit $fail
+
+      - name: Watermark charts
+        run: |
+          python -m pip install --quiet pillow
+          python .github/watermark/watermark.py "assets/*.png" --inplace --skip-marked
+          python .github/watermark/watermark.py "notebooks/*.ipynb" --notebooks --skip-marked

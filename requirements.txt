@@ -1,0 +1,15 @@
+pandas>=2.2
+numpy>=1.26
+matplotlib>=3.8
+statsmodels>=0.14
+scipy>=1.11
+requests>=2.31
+pyarrow>=15
+# Bayesian inference
+pymc>=5
+arviz>=0.18
+# notebook tooling
+jupyterlab>=4.0
+jupytext>=1.16
+nbconvert>=7.16
+ipykernel>=6.29
