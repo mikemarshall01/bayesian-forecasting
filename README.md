@@ -9,6 +9,17 @@ run.
 Built on free Binance daily data with **no API key required**. Part of a wider crypto-quant
 handbook; this is the Bayesian repo.
 
+## About
+
+This notebook began as my own notes while I taught myself Bayesian inference for markets,
+forecasting a distribution rather than a single number with hierarchical models in PyMC. I
+have tidied and organised it and put it online freely, in the hope that it is useful to
+others working through the same concepts. The emphasis is on explaining the ideas clearly,
+on free and public data. This is educational and illustrative work rather than production
+code or formal research, and any figures are there to illustrate the method rather than to
+report results. It is freely available under the MIT licence. Feedback and corrections are
+welcome. Provided as is, for educational use, with no warranty.
+
 ---
 
 ## What you will learn
