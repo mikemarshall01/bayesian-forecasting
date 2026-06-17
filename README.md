@@ -58,11 +58,11 @@ whose 90% credible band is deliberately, honestly wide.
 ## Data
 
 - **Source:** Binance public `klines` endpoint (`/api/v3/klines`): free, keyless, daily
-  history back to 2017 for the majors.
+  committed fixtures span 2021 to 2026 for the majors.
 - **How much you need:** a Bayesian return model needs only aligned **close-price series**,
   which are tiny and plentiful. We turn them into daily log returns.
 - The fetcher paginates full history and **caches to `data/` as Parquet**, so re-runs are
-  instant and work offline after the first fetch.
+  instant and run offline from the committed fixtures.
 
 ## Run it
 
@@ -100,7 +100,7 @@ bayesian-forecasting/
 │   ├── data.py     # free Binance klines fetcher + Parquet cache (keyless)
 │   └── style.py    # shared house chart style (consistent look across the handbook)
 ├── assets/         # rendered charts (committed, so they show in this README)
-├── data/           # cached Parquet (gitignored, re-fetched on first run)
+├── data/           # committed Parquet fixtures (run offline)
 ├── requirements.txt
 └── .env.example
 ```

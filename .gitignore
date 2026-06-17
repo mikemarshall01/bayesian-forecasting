@@ -6,7 +6,7 @@ __pycache__/
 # secrets
 .env
 
-# cached market data (re-fetched on first run; never committed)
+# the small Parquet fixtures in data/ are committed on purpose so the notebook runs offline
 
 
 

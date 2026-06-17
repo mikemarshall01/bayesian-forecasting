@@ -2,7 +2,7 @@
 
 Binance's ``/api/v3/klines`` endpoint is public, keyless and goes back to 2017 for the
 majors. We paginate to pull full history and cache each series to ``data/`` as Parquet,
-so a notebook re-run is instant and works offline after the first fetch.
+so a notebook re-run is instant and runs offline from the committed fixtures.
 
 The ``.env`` / API-key pattern is supported for consistency with the other repos in the
 handbook (some of which DO need keys, e.g. Etherscan, FRED), but THIS module needs none.

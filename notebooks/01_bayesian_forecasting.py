@@ -13,6 +13,8 @@
 # ---
 
 # %% [markdown]
+# *Educational notes, tidied and shared freely. Illustrative, not production.*
+#
 # # Bayesian Forecasting for Finance
 #
 # **The whole idea in one sentence: stop forecasting a number, forecast a distribution, and let the data tell you how wide that distribution honestly has to be.** By the end of this notebook you will have fitted a small hierarchical Bayesian model of daily crypto returns with PyMC. You will have sampled it with modern MCMC, checked the sampler's homework with the proper diagnostics, and checked the *model's* homework with posterior predictive checks. The payoff is a 30-day probabilistic forecast with honest credible intervals, all from free Binance data with no API key.
@@ -31,7 +33,7 @@
 #
 # A **Further reading and resources** section at the end collects the canonical papers, books and documentation behind every technique used here.
 #
-# > **Data:** Binance public daily klines (free, no key, history back to 2017).
+# > **Data:** Binance public daily klines (free, no key; committed fixtures span 2021 to 2026).
 # > **Nothing here is investment advice.** It is an educational walkthrough of a method, with its weaknesses stated as plainly as its strengths.
 
 # %%
